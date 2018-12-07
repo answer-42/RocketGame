@@ -1,5 +1,5 @@
 local rocket = require "rocket"
-local name = require "asteroids"
+local asteroids = require "asteroids"
 
 function love.load()
   love.window.setMode(450,800, {resizable = true,vsync = false})
