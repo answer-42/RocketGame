@@ -1,28 +1,22 @@
-local rocket = require "rocket"
-local asteroids = require "asteroids"
+gamestates = require "gamestates"
 
 function love.load()
   love.window.setMode(450,800, {resizable = true,vsync = false})
   love.window.setTitle("RocketGame")
-  rocket.load()
-  asteroids.load()
+  gamestates.set_state("menu")
 end
 
 function love.update(dt)
-  rocket.update(dt)
-  asteroids.update(dt)
+  gamestates.state_event("update", dt)
 end
 
 function love.draw()
-  rocket.draw()
-  asteroids.draw()
+  gamestates.state_event("draw")
+end
+
+function love.keyreleased(key, code)
+  gamestates.state_event("keyreleased", key, code)
 end
 
 function love.quit()
-end
-
-function love.keyreleased(key)
-  if key == "escape" then
-    love.event.quit()
-  end
 end
