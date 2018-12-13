@@ -7,8 +7,11 @@ local radius = 5
 local segments = 10
 local speed = 1
 
+local time
+
 function bullets.init()
   bullets.database = {}
+  time = love.timer.getTime()
 end
 
 function bullets.load()
@@ -38,9 +41,16 @@ function bullets.shoot_bullet(rocket)
   local x = rocket.position.x + 16 * math.sin(direction)
   local y = rocket.position.y - 16 * math.cos(direction)
 
-  table.insert(bullets.database, {position = vector(x,y),
-                                  direction = direction,
-                                  speed = vector(speed*-math.sin(-direction), speed*-math.cos(-direction))})
+  if love.timer.getTime() - time > 0.2 then
+    table.insert(bullets.database, {position = vector(x,y),
+                                    direction = direction,
+                                    speed = vector(speed*-math.sin(-direction), speed*-math.cos(-direction))})
+    time = love.timer.getTime()
+  end
+end
+
+function bullets.resolve_collision(bullet_number)
+  table.remove(bullets.database, bullet_number)
 end
 
 return bullets

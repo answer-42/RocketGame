@@ -30,7 +30,11 @@ function asteroids.draw()
   end
 end
 
-function asteroids.resolve_collision()
+function asteroids.resolve_collision(asteroid_number)
+  table.remove(asteroids.database, asteroid_number)
+  if #asteroids.database == 0 then
+      gamestates.set_state("game_finished")
+    end
 end
 
 return asteroids

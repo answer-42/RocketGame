@@ -26,7 +26,7 @@ function game.update(dt)
   rocket.update(dt)
   asteroids.update(dt)
   bullets.update(dt)
-  collisions.resolve(rocket, asteroids.database, bullets.database)
+  collisions.resolve(rocket, asteroids, bullets)
 end
 
 function game.draw()
